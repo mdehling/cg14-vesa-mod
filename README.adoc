@@ -1,0 +1,86 @@
+= SUN CG14 VESA Mod
+Malte Dehling <mdehling@gmail.com>
+
+:imagesdir: https://raw.githubusercontent.com/1k5/cg14-vesa-mod/main/img/
+
+:url-framebuffer-faq: http://www.sunhelp.org/faq/FrameBuffer.html
+:url-SUNWddk: https://stuff.mit.edu/afs/athena/contrib/watchmaker/SUNWddk/
+:url-dM-fcunc: git://git.rodents-montreal.org/fcunc/
+:url-sslx-vesa-mod: https://github.com/1k5/sslx-vesa-mod
+
+
+The CG14 / SX is the onboard framebuffer in the SPARCstation 20 and the (rare)
+SPARCstation 10SX.  The goal of this project is to modify the CG14 FCode and
+add additional video modes, in particular modes suitable for use with modern
+LCD displays.
+
+This repository contains images of the SPARCstation 20 PROM v2.25 and v2.25r
+and the extracted CG14 FCode, which turns out to be identical in both cases.
+The current state of the project is as follows:
+
+
+The OpenBoot PROM
+-----------------
+Here is an overview of the relevant parts of the OBP v2.25 and v2.25r PROMs.
+As mentioned above, the CG14 FCode in both is identical.
+
+.SPARCstation 20 PROM layout v2.25
+[%autowidth]
+|===
+| Start   | Length | End     | Description
+
+| 0x299a0 | 0x013c | 0x29adc | sbus@e fcode: SUNW,DBRIe
+| 0x29ae0 | 0x4ba0 | 0x2e680 | sbus@f fcode: espdma esp sd st ledma le mmcodec
+| 0x2e680 | 0xc3bc | 0x3aa3c | CG14 FCode
+| 0x3ac40 | 0x24d8 | 0x3d118 | console font
+|===
+
+.SPARCstation 10/20 PROM layout v2.25r
+[%autowidth]
+|===
+| Start   | Length | End     | Description
+
+| 0x29d08 | 0x2ca4 | 0x2c9ac | sbus@f fcode: espdma esp
+| 0x2c9b0 | 0x0158 | 0x2cb08 | sbus@e fcode: SUNW,DBRIe
+| 0x2cb08 | 0x4bfc | 0x31704 | sbus@f fcode: espdma esp sd st ledma le mmcodec
+| 0x31708 | 0x013c | 0x31844 | sbus@e fcode: SUNW,DBRIe
+| 0x31848 | 0xc3bc | 0x3dc04 | CG14 FCode
+| 0x3e008 | 0x24d8 | 0x404e0 | console font
+|===
+
+
+The CG14 FCode
+--------------
+The file `ss20-cg14.fcode` contains the CG14 FCode extracted from the PROM.  I
+detokenized the FCode using combination of both SUNs detokenizer and _der
+Mouse_'s.  The resulting file `ss20-cg14.fth` when tokenized using SUNs
+tokenizer reproduces the binary FCode exactly.
+
+The next step is to modify the Forth code and add additional video modes.  This
+is still a work in progress, so stay tuned.
+
+
+The Logos
+---------
+The CG14 comes with 3 built-in logos:
+
+image:cg14-logo0.png["CG14 Logo 0"]
+image:cg14-logo1.png["CG14 Logo 1"]
+image:cg14-logo2.png["CG14 Logo 2"]
+
+
+References
+----------
+{url-framebuffer-faq}::
+        The SUN Framebuffer FAQ.
+
+{url-SUNWddk}::
+        Here you can find the SUNWfcode package used for (de)tokenizing.
+
+link:{url-dM-fcunc}[]::
+	Der Mouse's FCode uncompiler.
+
+{url-sslx-vesa-mod}::
+	My SPARCstation LX VESA Mod Project.  It contains a lot more
+	information that I chose not to repeat here.
+
