@@ -16,7 +16,6 @@ LCD displays.
 
 This repository contains images of the SPARCstation 20 PROM v2.25 and v2.25r
 and the extracted CG14 FCode, which turns out to be identical in both cases.
-The current state of the project is as follows:
 
 
 The OpenBoot PROM
@@ -56,8 +55,14 @@ detokenized the FCode using combination of both SUNs detokenizer and _der
 Mouse_'s.  The resulting file `ss20-cg14.fth` when tokenized using SUNs
 tokenizer reproduces the binary FCode exactly.
 
-The next step is to modify the Forth code and add additional video modes.  This
-is still a work in progress, so stay tuned.
+Adding Oscillator Frequencies
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Looking at the source code, it seems that the CG14 uses the same ICS1562 _User
+Programmable Clock Generator_ as the onboard CG6 in the SPARCstation LX and the
+TurboGX+ SBUS cards.  Check out my {url-sslx-vesa-mod}[SPARCstation LX VESA
+Mod] Project if you're interested in how to add new timing modes.
+
+I will add a PROM image with some useful frequencies soon, hopefully.
 
 
 The Logos

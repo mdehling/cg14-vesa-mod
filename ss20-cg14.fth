@@ -415,6 +415,14 @@ hex
 : init-pcg ( -- )  pixfreq >pcg-regval pcg! ;
 
 
+\
+\ These look suspiciously like the register values for an ICS1562, the same
+\ _User Programmable Differential Output Graphcis Clock Generator_ that is used
+\ in the SPARCstation LX and the TurboGX+ SBUS card.  The values here are the
+\ same as those for the ics47, ics54, etc. words in the LX but in reverse order
+\ and shifted by 4 bits.  For additional information, see my explanations at
+\ https://github.com/1k5/sslx-vesa-mod or the ICS1562 datasheet.
+\
 create ics-47MHz
 50 c, 00 c, 00 c, 20 c, 80 c, 10 c, 00 c, 00 c, 40 c, a0 c, 00 c, 10 c, 00 c,
 create ics-54MHz
