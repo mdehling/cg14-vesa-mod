@@ -470,22 +470,33 @@ create ics-freq-table
 hex
 
 
-: >ics-freq ( pixfreq -- icsfreq ? )
-	d# 1.000.000 /
-	ics-freq-table >r
+\
+\ Returns address of the appropriate ics-word in the ics-freq-table above.
+\
+\ For f[i] <= f < f[i+1], the selected word is ics-word[i], e.g., for 192 the
+\ word ics-189MHz is selected.
+\
+: >ics-freq ( pixfreq -- ics-word )
+	d# 1.000.000 /			( f )
+	ics-freq-table >r		( f )			( rs: addr )
 
 	begin
-		r@ <w@ -1 <>
+		r@ <w@			( f [addr] )		( rs: addr )
+		-1 <>			( f [addr]<>-1 )	( rs: addr )
 	while
-		dup r@ w@ r@ 6 + w@ within if
-			drop r> /w + @ exit
+		dup r@ w@		( f f [addr] )		( rs: addr )
+		r@ 6 + w@		( f f [addr] [addr+6] )	( rs: addr )
+		within if		( f )			( rs: addr )
+			drop		( -- )			( rs: addr )
+			r> /w + @	( [addr+2] )		( rs: -- )
+			exit
 		then
-		r> 6 + >r
+		r> 6 + >r		( f )			( rs: addr+6 )
 	repeat
 
-	r> 2drop
+	r> 2drop			( -- )			( rs: -- )
 
-	ics-freq-table /w + @
+	ics-freq-table /w + @		( [ics-freq-table+2] )	( rs: -- )
 ;
 
 
