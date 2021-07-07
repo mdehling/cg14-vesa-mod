@@ -143,7 +143,7 @@ headers
 	8 of  r1600x1280x66   endof
 	7 of  r1152x900x66    endof
 	6 of  r1152x900x76    endof
-	5 of  r1024x768x60    endof	\ mistake? r1024x768x66 is missing.
+	5 of  r1024x768x60    endof
 	4 of  r1152x900x76    endof
 	3 of  r1152x900x66    endof
 	2 of  r1280x1024x76m  endof
