@@ -20,8 +20,8 @@ and the extracted CG14 FCode, which turns out to be identical in both cases.
 
 Compatibility
 -------------
-Before you get too excited and do anything, read this section first to make
-sure you know what you can expect out of this mod.
+Before you get too excited and do anything, read this section to make sure you
+know what to expect out of this mod.
 
 I will expand this section soon with photos and more details.  Just some short
 notes for now:
@@ -32,7 +32,7 @@ notes for now:
 
 - NetBSD 9.2 boots fine.  The Xorg 'xf86-video-suncg14' driver implements only
   24-bit support.  I have patched it to add 8-bit support and Xorg works fine
-  at 1920x1200x60 in 8-bit mode with a 4MB VSIMM.  Now hardware acceleration
+  at 1920x1200x60 in 8-bit mode with a 4MB VSIMM.  No hardware acceleration
   for now!
 
 
