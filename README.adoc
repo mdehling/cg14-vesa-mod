@@ -18,6 +18,24 @@ This repository contains images of the SPARCstation 20 PROM v2.25 and v2.25r
 and the extracted CG14 FCode, which turns out to be identical in both cases.
 
 
+Compatibility
+-------------
+Before you get too excited and do anything, read this section first to make
+sure you know what you can expect out of this mod.
+
+I will expand this section soon with photos and more details.  Just some short
+notes for now:
+
+- Solaris' cgfourteen driver keeps an internal table of admissable pixel clocks
+  and resolutions and needs to be patched.  This part is easy.  However, the
+  Xsun server crashes and I have no clue why exactly and how to fix it.
+
+- NetBSD 9.2 boots fine.  The Xorg 'xf86-video-suncg14' driver implements only
+  24-bit support.  I have patched it to add 8-bit support and Xorg works fine
+  at 1920x1200x60 in 8-bit mode with a 4MB VSIMM.  Now hardware acceleration
+  for now!
+
+
 The OpenBoot PROM
 -----------------
 Here is an overview of the relevant parts of the OBP v2.25 and v2.25r PROMs.
@@ -55,21 +73,16 @@ PROM.  I detokenized the FCode using a combination of both SUNs detokenizer and
 _der Mouse_'s.  The resulting file `ss20-cg14.fth` when tokenized using SUNs
 tokenizer reproduces the binary FCode exactly.
 
-Looking at the forth source, it seems that the CG14 uses the same ICS1562 _User
-Programmable Clock Generator_ as the onboard CG6 in the SPARCstation LX and the
-TurboGX+ SBUS cards.  Check out my {url-sslx-vesa-mod}[SPARCstation LX VESA
-Mod] Project if you're interested in understanding how to add new timings and
-video modes.
+The CG14 uses the same ICS1562 _User Programmable Clock Generator_ as the
+onboard CG6 in the SPARCstation LX and the TurboGX+ SBUS cards.  Check out my
+{url-sslx-vesa-mod}[SPARCstation LX VESA Mod] Project if you're interested in
+understanding how to add new timings and video modes.
 
 The file link:ss20-cg14-vesa.fth[] contains a few modifications to add (nearly)
 VESA video modes 1280x1024x60, 1600x1200x60, and 1920x1200x60, and the 162MHz
 and 193MHz pixel clocks they require.  The files link:ss20-2.25-vesa.bin[] and
 link:ss20-2.25r-vesa.bin[] are the patched PROM images for OBP v2.25 and
 v2.25r, respectively.
-
-WARNING:  I have _not tested_ these yet since I don't currently have a VSIMM
-for my SPARCstation 20.  I hope to get one soon and will update when I do.  If
-you do try these out, please let me know how it goes!
 
 
 The Logos
