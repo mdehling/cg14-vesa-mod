@@ -1,7 +1,7 @@
 = SUN CG14 VESA Mod
 Malte Dehling <mdehling@gmail.com>
 
-:imagesdir: https://raw.githubusercontent.com/1k5/cg14-vesa-mod/main/img/
+:imagesdir: https://raw.githubusercontent.com/mdehling/cg14-vesa-mod/main/img/
 
 :url-framebuffer-faq: http://www.sunhelp.org/faq/FrameBuffer.html
 :url-SUNWddk: https://archive.org/details/sun-ddk-v2.6/
